@@ -14,10 +14,10 @@ const DeepExtend = require('deep-extend');
 const validateLicense = require('validate-npm-package-license');
 
 const HOME = require('os').homedir();
-const ESY_PATH = './node_modules/.bin/esy';
+const ESY_PATH = __dirname + '/node_modules/.bin/esy';
 
 const isDebug = () => { return !!process.env.ESYR_DEBUG; };
-const print = (type, args) => { args.unshift("esyr " + type); console.log.apply(console, args); };
+const print = (type, args) => { args.unshift("esyr " + type); console.error.apply(console, args); };
 const debug = isDebug() ? (...args) => { print("DEBUG", args); } : (...args) => {};
 const warn = (...args) => { print("WARN", args); };
 const error = (...args) => { print("ERROR", args); };
@@ -31,7 +31,7 @@ const githubRepo = (gitUser, host, proto, user, repo, conf) => {
     conf.homepage = "https://github.com/" + user + "/" + repo + "#readme";
 };
 
-const repository = module.exports.repository = (repo, conf) => {
+const repository = module.exports.repository = (repo /*:string*/, conf /*:Object*/) => {
     let done = false;
     repo.replace(/^([^\/@]+)@([^:\/]+):([^\/]+)\/(.*)$/, (all, gitUser, host, user, repo) => {
         conf.repository = { type: "git", url: all };
@@ -146,7 +146,7 @@ const init = (argv, done) => {
             }
         }));
     }).nThen((w) => {
-        Fs.writeFile('package.json', JSON.stringify(conf, null, '  '), 'utf8', w((err) => {
+        Fs.writeFile('package.json', JSON.stringify(conf, null, '  ') + '\n', 'utf8', w((err) => {
             if (err) { throw err; }
         }));
     }).nThen((w) => {
@@ -466,9 +466,10 @@ const main = (argv) => {
     argv.shift();
     if (!argv.length || argv[0] === 'help') { return void usage(); }
     if (argv[0] === 'init') { return void init(argv, ()=>{}); }
-    if (argv[0] === 'esy') { return void esy(argv, ()=>{}); }
+    if (argv[0] === 'esy') { return void esy(argv, (code)=>{ process.exit(code); }); }
 
     let conf;
+    let esyOk = false;
     nThen((w) => {
         findRoot(w((r) => {
             if (!r) { w.abort(); return void noPkg(); }
@@ -545,11 +546,11 @@ const main = (argv) => {
     }).nThen((w) => {
         switchPkgJson(conf, w());
     }).nThen((w) => {
-        esy(argv, w());
+        esy(argv, w((code) => { esyOk = (code === 0); }));
     }).nThen((w) => {
         cleanup(w());
     }).nThen((w) => {
-        if (!(conf.esyr && conf.esyr[argv[0]])) { return; }
+        if (!(conf.esyr && conf.esyr[argv[0]] && esyOk)) { return; }
         let list = conf.esyr[argv[0]];
         if (list.indexOf('esy') === -1) { return; }
         list = list.slice(list.indexOf('esy') + 1);
