@@ -80,7 +80,7 @@ const init = (argv, done) => {
     const conf = {};
     conf.esyr = {};
     conf.esyr.extends =
-        "https://raw.githubusercontent.com/cjdelisle/esyr/package-json-prototypes/default-reason.json";
+        "https://raw.githubusercontent.com/cjdelisle/esyr/1.0.0/package-json-prototypes/default-reason.json";
     const QUESTIONS = [
         [ "name", process.cwd().split(Path.sep).pop(), (arg) => {
             if (!/^[a-zA-Z0-9_\-\.\~]+$/.test(arg)) {
