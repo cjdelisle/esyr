@@ -1,0 +1,36 @@
+{
+  "name": "esyr",
+  "version": "1.0.0",
+  "description": "Layer over esy to add a few missing features",
+  "bin": {
+    "esyr": "./esyr.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cjdelisle/esyr.git"
+  },
+  "keywords": [
+    "esy",
+    "reasonml",
+    "ocaml"
+  ],
+  "author": "Caleb James DeLisle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cjdelisle/esyr/issues"
+  },
+  "homepage": "https://github.com/cjdelisle/esyr#readme",
+  "devDependencies": {
+    "esy": "^0.2.0",
+    "flow-bin": "^0.77.0",
+    "jshint": "^2.9.5"
+  },
+  "dependencies": {
+    "deep-extend": "^0.6.0",
+    "nthen": "^0.1.7",
+    "validate-npm-package-license": "^3.0.3"
+  }
+}

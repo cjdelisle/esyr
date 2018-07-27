@@ -1,0 +1,44 @@
+{
+    "esy": {
+        "build": [
+            [
+                "refmterr",
+                "jbuilder",
+                "build"
+            ]
+        ],
+        "install": [
+            "esy-installer"
+        ],
+        "buildsInSource": "_build"
+    },
+    "esyr": {
+        "build": [
+            [
+                "esyr",
+                "mkdunes",
+                "--version",
+                "0"
+            ],
+            "esy",
+            [
+                "esyr",
+                "mvexe",
+                "./"
+            ]
+        ]
+    },
+    "dependencies": {
+        "@esy-ocaml/esy-installer": "^0.0.0",
+        "@opam/dune": "*",
+        "@esy-ocaml/reason": "^3.0.0",
+        "refmterr": "^3.0.4"
+    },
+    "peerDependencies": {
+        "ocaml": "~4.6.0"
+    },
+    "devDependencies": {
+        "@esy-ocaml/merlin": "*",
+        "ocaml": "~4.6.0"
+    }
+}
