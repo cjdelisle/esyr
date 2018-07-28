@@ -1,0 +1,9 @@
+branches:
+node_js:
+  - "8"
+  - "9"
+  - "10"
+script:
+  - npm run-script test
+  - npm run-script lint
+  - npm run-script flow

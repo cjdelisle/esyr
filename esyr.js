@@ -110,7 +110,7 @@ const init = (argv, done) => {
         [ "license", "ISC", (arg) => {
             const its = validateLicense(arg);
             if (!its.validForNewPackages) {
-                let errors = (its.errors || []).concat(its.warnings || [])
+                let errors = (its.errors || []).concat(its.warnings || []);
                 return 'Sorry, ' + errors.join(' and ') + '.';
             }
             conf.license = arg;

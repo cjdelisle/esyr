@@ -9,7 +9,7 @@ well... esyr :)
 You need to have node and npm installed but you don't need anything else.
 
 ```bash
-$ npm install -g https://github.com/cjdelisle/esyr
+$ npm install -g esyr
 $ mkdir first-reason-project
 $ cd first-reason-project
 $ esyr init  ## follow the instructions to make a package.json file
@@ -121,3 +121,19 @@ different versions of ocaml to co-exist.
   * `help`: print a brief help notice
   * `<anything>`: Swap the package.json file for the one with the extended prototype
   merged, then invoke esy with the swapped package.json file, then swap it back.
+
+## Status
+
+This is currently experimental, use at your own risk and remember that you might
+need to do some migrations in future versions.
+
+### TODO
+
+* [] `esyr install --save` not supported yet (also need to add dependencies to jbuild file)
+* [] `esyr clean` ought to also clean up the _build directory and the generated dune
+files.
+* [] Stop swapping `package.json` files, it's the source of plenty of bugs.
+  * Solution 1: esy supports extends
+  * Solution 2: `esyr.json` file, allowing package.json to be generated (like a dune file).
+* [] Support building OCaml projects
+* [] Support building libraries
