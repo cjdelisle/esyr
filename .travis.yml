@@ -4,6 +4,8 @@ node_js:
   - "9"
   - "10"
 script:
+  - npm install
   - npm run-script test
   - npm run-script lint
   - npm run-script flow
+  - bash -x ./test-esyr.sh
