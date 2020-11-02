@@ -1,5 +1,7 @@
 # Esyr - An esy overlay
 
+Status: unmaintained, hopefully the core concepts have been integrated in esy
+
 [![Build Status](https://travis-ci.org/cjdelisle/esyr.svg?branch=master)](https://travis-ci.org/cjdelisle/esyr)
 
 This tool is meant to add some of the features from npm which are currently
